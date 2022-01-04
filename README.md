@@ -1,7 +1,14 @@
 # cBot-Project  
+Mise en place serveur avec Ubuntu dernière release dispo
+
+>sudo apt-get update
+
+>sudo apt install pip
+
+
 
 Mise en place du projet:  
->git clone https://github.com/CryptoRobotFr/cBot-Project.git
+>git clone -b live-branch https://github.com/CryptoRobotFr/cBot-Project.git
 
 Installation des dépendances:  
 >pip install -r requirements.txt  
