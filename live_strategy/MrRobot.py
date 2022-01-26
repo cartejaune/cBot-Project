@@ -110,6 +110,8 @@ for coin in dfList:
     dfList[coin]['WillR'] = ta.momentum.williams_r(high=dfList[coin]['high'], low=dfList[coin]['low'], close=dfList[coin]['close'], lbp=willWindow)
     dfList2[coin]['EMA30'] =ta.trend.ema_indicator(close=dfList2[coin]['close'], window=30)
     dfList2[coin]['EMA100'] =ta.trend.ema_indicator(close=dfList2[coin]['close'], window=100)
+    dfList[coin]['EMA100'] =ta.trend.ema_indicator(close=dfList[coin]['close'], window=100)
+    dfList[coin]['EMA200'] =ta.trend.ema_indicator(close=dfList[coin]['close'], window=200)
         
 print("Data and Indicators loaded 100%")
 
@@ -120,6 +122,7 @@ def buyCondition(row, previousRow=None):
         and previousRow['AO'] > row['AO']
         and row['WillR'] < willOverSold
         and dfList2[coin]['EMA30'].iloc[-2] > dfList2[coin]['EMA100'].iloc[-2]
+        and row['EMA100'] > row['EMA200']
     ):
         return True
     else:
@@ -135,7 +138,7 @@ def sellCondition(row, previousRow=None):
     ):
         return True
     else:
-        print('Pas de conditions SELL')
+        print('Pas de conditions SELL pour le coin',coin)
         return False
     
 coinBalance = ftx.get_all_balance()
