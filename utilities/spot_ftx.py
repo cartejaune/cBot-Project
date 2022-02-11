@@ -128,6 +128,23 @@ class SpotFtx():
             print("An error occured", err)
             exit()
         return allBalance
+    
+    @authentication_required
+    def get_all_balance_in_usdt(self):
+        try:
+            allBalance = self._session.fetchBalance()
+            allBalance = allBalance['total']
+            for coin in allBalance:
+                if coin != 'USDT':
+                    try:
+                        allBalance[coin] = float(allBalance[coin]) * float(self.market[coin+'/USDT']['info']['last'])
+                    except:
+                        pass
+                        print("Cannot get price of",coin+'/USDT')
+        except BaseException as err:
+            print("An error occured", err)
+            exit()
+        return allBalance
 
     @authentication_required
     def get_balance_of_one_coin(self, coin):
