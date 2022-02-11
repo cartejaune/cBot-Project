@@ -81,7 +81,7 @@ def sellCondition(row, previousRow=None):
         return False
     
 coinBalance = ftx.get_all_balance()
-coinInUSD = ftx.get_all_balance_in_usd()
+coinInUSD = ftx.get_all_balance_in_usdt()
 usdBalance = coinBalance['USDT']
 del coinBalance['USDT']
 del coinInUsd['USDT']
